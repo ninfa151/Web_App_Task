@@ -1,0 +1,52 @@
+<p></p>
+<div class="login-body">
+    <mat-card>
+        <mat-toolbar color="primary">
+            <span><strong>Task Dragon</strong> にログイン</span>
+        </mat-toolbar>
+        <mat-card-header>
+            <mat-card-subtitle>メールアドレスとパスワードを入力してログインしてください</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="body">
+            <form class="email-form">
+                <mat-form-field class="form-full-width">
+                    <mat-label>メールアドレス</mat-label>
+                    <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="emailMatcher"
+                        (input)="checkFormValidity()" placeholder="メールアドレスを入力してください" #username>
+                    @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+                    <mat-error>正しいメールアドレスが入力されていません</mat-error>
+                    }
+                    @if (emailFormControl.hasError('required')) {
+                    <mat-error><strong>入力がありません</strong></mat-error>
+                    }
+                </mat-form-field>
+            </form>
+            <form class="password-form">
+                <mat-form-field class="form-full-width">
+                    <mat-label>パスワード</mat-label>
+                    <input matInput [type]="pwHide ? 'password' : 'text'" [formControl]="passwordFormControl"
+                        (input)="checkFormValidity()" [errorStateMatcher]="passwordMatcher" placeholder="半角英数字で入力してください"
+                        #password>
+                    @if (passwordFormControl.hasError('pattern') && !passwordFormControl.hasError('required')) {
+                    <mat-error>パスワードが入力規則を満たしていません</mat-error>
+                    }
+                    @if (passwordFormControl.hasError('required')) {
+                    <mat-error><strong>入力がありません</strong></mat-error>
+                    }
+                    <button mat-icon-button matSuffix (click)="pwHide = !pwHide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="pwHide">
+                        <mat-icon>{{pwHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <h5 *ngIf="showingDesc" class="pwDesc">※パスワードは8~20文字で、少なくとも1つ以上の大文字小文字の半角英語と半角数字を入力する必要があります</h5>
+            </form>
+            <button mat-raised-button color="primary" class="loginBtn" [disabled]="!isBtnActive"
+                (click)="login(username.value, password.value)"><strong>ログイン</strong></button>
+            <p></p>
+            <div class="flex-area">
+                <h4>アカウントをお持ちでない場合は</h4>
+                <h4 (click)="moveToAcCreation()" class="create-link"><strong>こちらから新規登録してください</strong></h4>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

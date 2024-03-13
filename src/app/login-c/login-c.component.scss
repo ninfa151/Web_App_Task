@@ -1,0 +1,75 @@
+.login-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.loginBtn{
+  width: 100%;
+}
+
+.flex-area{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.create-link :hover{
+  color: blue;
+  cursor: pointer;
+  border-bottom: 1px solid blue;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  max-width: 70vw;
+}
+
+.email-form {
+  min-width: 50vw;
+  max-width: 70vw;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.password-form {
+  min-width: 50vw;
+  max-width: 70vw;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+
+.form-full-width {
+  width: 100%;
+}
+
+.pwDesc {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.loginBtn{
+  width: 100%;
+}
+
+.flex-area{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.create-link :hover{
+  color: blue;
+  cursor: pointer;
+  border-bottom: 1px solid blue;
+}

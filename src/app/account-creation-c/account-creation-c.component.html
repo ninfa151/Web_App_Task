@@ -1,0 +1,107 @@
+<p></p>
+<div class="ac-cre-body">
+    <mat-card>
+        <mat-toolbar color="primary">
+            <span><strong>Task Dragon</strong> のアカウントを作成</span>
+        </mat-toolbar>
+        <mat-stepper [linear]="isLinear" #stepper class="ac-cre-stepper">
+            <mat-step [stepControl]="firstFormGroup">
+                @if (steps.first){
+                <ng-template matStepLabel>メールとパスワードを入力</ng-template>
+                }
+                <mat-card-header>
+                    <mat-card-subtitle>メールアドレスとパスワードを入力して仮登録してください</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content class="input-body">
+                    <form class="email-form">
+                        <mat-form-field class="form-full-width">
+                            <mat-label>メールアドレス</mat-label>
+                            <input type="email" matInput [formControl]="emailFormControl"
+                                [errorStateMatcher]="emailMatcher" (input)="checkFormValidity()"
+                                placeholder="メールアドレスを入力してください" #username>
+                            @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+                            <mat-error>正しいメールアドレスが入力されていません</mat-error>
+                            }
+                            @if (emailFormControl.hasError('required')) {
+                            <mat-error><strong>入力がありません</strong></mat-error>
+                            }
+                        </mat-form-field>
+                    </form>
+                    <form class="password-form">
+                        <mat-form-field class="form-full-width">
+                            <mat-label>パスワード</mat-label>
+                            <input matInput [type]="pwHide ? 'password' : 'text'" [formControl]="passwordFormControl"
+                                (input)="checkFormValidity()" [errorStateMatcher]="passwordMatcher"
+                                placeholder="半角英数字で入力してください" #password>
+                            @if (passwordFormControl.hasError('pattern') && !passwordFormControl.hasError('required')) {
+                            <mat-error>パスワードが入力規則を満たしていません</mat-error>
+                            }
+                            @if (passwordFormControl.hasError('required')) {
+                            <mat-error><strong>入力がありません</strong></mat-error>
+                            }
+                            <button mat-icon-button matSuffix (click)="pwHide = !pwHide"
+                                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="pwHide">
+                                <mat-icon>{{pwHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <h5 *ngIf="showingDesc" class="pwDesc">
+                            ※パスワードは8~20文字で、少なくとも1つ以上の大文字小文字の半角英語と半角数字、1つ以上の記号を入力する必要があります</h5>
+                    </form>
+                </mat-card-content>
+                <button mat-raised-button color="primary" class="register-btn" [disabled]="!isBtnActive"
+                    (click)="onClickGoConfirmation(username.value, password.value, stepper)"
+                    matStepperNext><strong>認証へ進む</strong></button>
+            </mat-step>
+            <mat-step [stepControl]="secondFormGroup">
+                @if (steps.second){
+                <ng-template matStepLabel>認証コードを入力</ng-template>
+                }
+                <p></p>
+                <mat-label><strong>{{username.value}}</strong>に認証メールを送信しました</mat-label>
+                <p></p>
+                <form [formGroup]="secondFormGroup" class="second-form">
+                    <mat-form-field class="form-full-width">
+                        <mat-label>メールアドレスに送信された認証コードを入力</mat-label>
+                        <input matInput formControlName="secondCtrl" class="second-ctrl" [formControl]="secondCtrl"
+                            #inputCode [errorStateMatcher]="cfmMatcher">
+                        @if (secondCtrl.hasError('pattern') && !secondCtrl.hasError('required')) {
+                        <mat-error>認証コードは半角数字で入力して下さい</mat-error>
+                        }
+                        @if (secondCtrl.hasError('required')) {
+                        <mat-error><strong>入力がありません</strong></mat-error>
+                        }
+                    </mat-form-field>
+                    <p></p>
+                    @if (isMoreInfoConfirmation.errorDesc){
+                    <div class="crm-error-display">
+                        <mat-error><strong>入力された認証コードが間違っています</strong></mat-error>
+                        <mat-error><strong>メールアドレスに送られた認証コードを確認してください</strong></mat-error>
+                        <button mat-raised-button class="send-cfm-btn"
+                            color="warn"><strong>認証メールを再送信する</strong></button>
+                        @if (isMoreInfoConfirmation.mailsentDesc) {
+                        <mat-error><strong>{{username}}に認証メールを再送信しました</strong></mat-error>
+                        }
+                    </div>
+                    <p></p>
+                    }
+                    <div class="form-full-width">
+                        <button mat-raised-button class="confirm-btn" color="primary"
+                            [disabled]="secondCtrl.hasError('required')"
+                            (click)="onClickConfirm(inputCode.value, stepper)"><strong>認証する</strong></button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step [stepControl]="thirdFormGroup">
+                <div class="flex-area">
+                    <mat-label class="form-full-width">アカウントの作成が完了しました</mat-label>
+                    <mat-label class="form-full-width">ログイン画面にてログインしてください</mat-label>
+                    <p></p>
+                    <div class="form-full-width">
+                        <button mat-raised-button color="primary" (click)="navigateLogin()"><strong>ログイン画面に戻る</strong></button>
+                    </div>
+                </div>
+            </mat-step>
+        </mat-stepper>
+        <p></p>
+    </mat-card>
+</div>

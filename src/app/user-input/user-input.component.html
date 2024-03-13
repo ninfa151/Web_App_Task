@@ -1,0 +1,33 @@
+<!-- <div class="body">
+    <form class="email-form">
+        <mat-form-field class="form-full-width">
+            <mat-label>メールアドレス</mat-label>
+            <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="emailMatcher"  (input)="checkFormValidity()"
+                placeholder="メールアドレスを入力してください">
+            @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+            <mat-error>正しいメールアドレスが入力されていません</mat-error>
+            }
+            @if (emailFormControl.hasError('required')) {
+            <mat-error><strong>入力がありません</strong></mat-error>
+            }
+        </mat-form-field>
+    </form>
+    <form class="password-form">
+        <mat-form-field class="form-full-width">
+            <mat-label>パスワード</mat-label>
+            <input matInput [type]="pwHide ? 'password' : 'text'" [formControl]="passwordFormControl" (input)="checkFormValidity()"
+                [errorStateMatcher]="passwordMatcher" placeholder="半角英数字で入力してください">
+            @if (passwordFormControl.hasError('pattern') && !passwordFormControl.hasError('required')) {
+            <mat-error>パスワードが入力規則を満たしていません</mat-error>
+            }
+            @if (passwordFormControl.hasError('required')) {
+            <mat-error><strong>入力がありません</strong></mat-error>
+            }
+            <button mat-icon-button matSuffix (click)="pwHide = !pwHide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="pwHide">
+                <mat-icon>{{pwHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <h5 *ngIf="showingDesc" class="pwDesc">※パスワードは8~20文字で、少なくとも1つ以上の大文字小文字の半角英語と半角数字を入力する必要があります</h5>
+    </form>
+</div> -->

@@ -1,0 +1,25 @@
+@use "@angular/material" as mat;
+@use "./assets/custom_palette" as palette;
+
+@include mat.core();
+
+// primary に先程作成した $custom-primary を指定
+$custom-primary: mat.define-palette(palette.$custom-primary);
+// secondary はAngular Material のpalette からlight-blue を指定
+$custom-accent: mat.define-palette(mat.$light-blue-palette, A200, A100, A400);
+$custom-warn: mat.define-palette(mat.$red-palette);
+
+$custom-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $custom-primary,
+      accent: $custom-accent,
+      warn: $custom-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($custom-theme);
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: rgb(65, 65, 65);}
